@@ -10,46 +10,130 @@
 <body>
     
 <div id="app">
-    <div class="produto">
 
-        <h1>{{ nomeProduto }}</h1>
-        <p>Preço: {{ precoFormatado }}</p>
-        <p>Estoque: {{ estoque }} unidades</p>
-        <label>Quantidade: </label>
+    <header>
 
-        <input
-            type="number"
-            v-model.number="quantidade"
-            min="1"
-        >
+        <div class="logo">
+            <strong>MARESIA</strong>
+        </div>
+
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#produto">Produto</a>
+        </nav>
+
+    </header>
+
+        <section id="inicio" class="inicio">
+
+        <div class="texto-inicio">
+
+            <p class="subtitulo">
+                JOIAS INSPIRADAS NO MAR
+            </p>
+
+            <h1>
+                Joias que capturam a
+                <span>beleza do oceano.</span>
+            </h1>
+
+            <p>
+                Descubra uma peça delicada inspirada no clima das praias tropicais do nosso país.
+            </p>
+
+            <a href="#produto" class="botao">
+                Conhecer a joia
+            </a>
+
+        </div>
+
+    </section>
+
+    <section id="produto" class="produto-section">
+
+        <div class="titulo">
+            <p class="subtitulo"> PRODUTO EXCLUSIVO </p>
+            <h2> Feito para você </h2>
+        </div>
+
+        <div class="produto">
+
+            <div class="imagem-produto">
+                <img
+                    src="bracelete.jpeg"
+                    alt="Bracelete de ouro"
+                >
+            </div>
+
+            <div class="informacoes">
+                <p class="categoria">{{ categoria }}</p>
+                <h2>{{ nomeProduto }}</h2>
+                <p class="descricao">{{ descricao }}</p>
+                <p class="preco">Preço: {{ precoFormatado }}</p>
+
+                <div class="estoque-box">
+                    <p> Estoque: {{ estoque }} unidades </p>
+
+                    <p v-if="estoque <= 3" class="ultimas-unidades">
+                        {{ limiteEstoque }}
+                    </p>
+                </div>
+
+                <div class="quantidade">
+
+                    <label>Quantidade: </label>
+
+                    <input
+                        type="number"
+                        v-model.number="quantidade"
+                        min="1"
+                    >
+                </div>
+
+                <p v-show="quantidade > estoque" class="aviso">
+                    Quantidade indisponível em estoque.
+                </p>
+
+                <div class="total">
+                    <span>Total:</span>
+                    <strong>{{ totalFormatado }}</strong>
+                </div>
+
+                <p v-if="descontoAtivo" class="desconto">
+                    Desconto de 15% aplicado.
+                </p>
+
+                <button @click="aplicarDesconto" class="botao-secundario">
+                    {{ descontoAtivo ? 'Remover desconto' : 'Aplicar desconto'}}
+                </button>
+
+                <button @click="comprarProduto" class="botao-comprar" :disabled="quantidade > estoque">
+                    Comprar
+                </button>
+
+                <p v-if="mensagemCompra" class="mensagem">
+                    {{ mensagemCompra}}
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+
+        <div class="logo">
+            <strong>MARESIA</strong>
+        </div>
+
         <p>
-            
+            Joias inspiradas no mar.
         </p>
+
         <p>
-            Totaol:
-            <strong>{{ totalFormatado }}</strong>
+            Projeto Vue PWII - 2027
         </p>
 
-        <button @click="aplicarDesconto">
-            {{ descontoAtivo ? 'Remover desconto' : 'Aplicar desconto'}}
-        </button>
-
-        <button @click="comprarProduto">
-            Comprar
-        </button>
-
-        <p v-if="descontoAtivo">
-            Desconto de 10% aplicado.
-        </p>
-
-        <p v-if="mensagemCompra">
-            {{ mensagemCompra}}
-        </p>
-
-        <p v-show="quantidade > estoque" class="aviso">
-            Quantidade maior que o estoque disponível.
-        </p>
-    </div>
+    </footer>
 
 </div>
 
