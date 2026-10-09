@@ -41,13 +41,13 @@ const app = Vue.createApp({
     },
 
     methods: {
-            aplicarDesconto(){
-                this.descontoAtivo =
-                !this.descontoAtivo
-            },
+        aplicarDesconto(){
+            this.descontoAtivo =
+            !this.descontoAtivo
+        },
         
         
-            comprarProduto(){
+        comprarProduto(){
             if (
                 this.quantidade > 0 &&
                 this.quantidade <= this.estoque
